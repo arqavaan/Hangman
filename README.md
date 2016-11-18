@@ -1,10 +1,10 @@
 # Hangman
 
-project has some TODO shoud you implement
+project has some TODO that you shoud implement
 
 1- play logic:
 user can play game until game finish.
-when game is finish :
+<p>when game is finish :</p>
 * the user's tries finish
 * game is solved
 
@@ -17,7 +17,7 @@ note:if user enter UpperCase letter is acceptable
 we shoud warn to user
 
 5- this project I import have some bug
-you should find bug and resolve them!
+<im>you should find bug and resolve them!</im>
 
 
-6- be OOP : it's important you think as object oriented programming!
+6- be OOP : <b>it's important you think as object oriented programming!</b>
