@@ -17,20 +17,45 @@ public class Prompter {
 
     // TODO write play logic
     // while user has a try can play game
-    public void playGame(){
+    public void playGame() {
 
+        while (mGame.getRemainTries() > 0 && !mGame.isSolved()) {
+            displayProgress();
+            promptForGuess();
+        }
+
+        if (mGame.isSolved()) {
+
+            System.out.printf("Congratualtions you won with %d tries remaining ", mGame.getRemainTries());
+        } else {
+
+            System.out.printf("You lose, the word was %s , \n ", mGame.getmAnswer());
+        }
     }
 
 
     /**
-     *  get char from user and check if is hit or miss
+     * get char from user and check if is hit or miss
      */
     public boolean promptForGuess() {
 
         System.out.print("Enter a letter : ");
-        Scanner scanner = new Scanner(System.in);
-        char guess = scanner.next().charAt(0);
-        return mGame.applyGuess(guess);
+
+        boolean isHit = false;
+        boolean isValidate = false;
+        while (!isValidate) {
+            Scanner scanner = new Scanner(System.in);
+            String guess = scanner.next();
+            try {
+                isHit = mGame.applyGuess(guess);
+                isValidate = true;
+            } catch (IllegalArgumentException ill) {
+                System.out.printf("%s.  Please try again.\n", ill.getMessage());
+            }
+
+        }
+
+        return isHit;
 
     }
 

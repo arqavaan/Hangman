@@ -15,11 +15,24 @@ public class Game {
 
 
     public Game(String answer, int maxMisses) {
-        this.mAnswer = answer;
+        this.mAnswer = answer.toLowerCase();
         this.mMaxMisses = maxMisses;
-
+        this.mHit = "";
+        this.mMiss = "";
     }
 
+
+    public String getmAnswer() {
+        return mAnswer;
+    }
+
+    public boolean applyGuess(String letters) {
+
+        if (letters.length() == 0) {
+            throw new IllegalArgumentException("Not letter found! ");
+        }
+        return applyGuess(letters.charAt(0));
+    }
 
     /**
      * if guess be correct add to mHts else add to mMiss
@@ -27,9 +40,11 @@ public class Game {
      * @param letter
      * @return boolean that shows guess letter is accepted or not
      */
-    public boolean applyGuess(char letter) {
-
+    private boolean applyGuess(char letter) {
+        letter = validateGuess(letter);
         if (mAnswer.indexOf(letter) >= 0) {
+            mHit += letter;
+
             return true;
         } else {
             mMiss += letter;
@@ -41,8 +56,16 @@ public class Game {
 
     // TODO check the input is a letter or number
     //  and check char user guess is duplicate or not
-    private void validateGuess() {
+    private char validateGuess(char letter) {
 
+        if (!Character.isLetter(letter)) {
+            throw new IllegalArgumentException("A letter is required");
+        }
+        letter = Character.toLowerCase(letter);
+        if (mMiss.indexOf(letter) >= 0 || mHit.indexOf(letter) >= 0) {
+            throw new IllegalArgumentException(letter + " has already beed guessd");
+        }
+        return letter;
     }
 
 
@@ -55,9 +78,10 @@ public class Game {
 
         String progress = "";
 
-        for (char letter : mAnswer.toCharArray()) {
+        for (char letter : mAnswer.toLowerCase().toCharArray()) {
             char display = '-';
-            if (mHit.indexOf(letter) > 0) {
+            letter = Character.toLowerCase(letter);
+            if (mHit.indexOf(letter) >= 0) {
                 display = letter;
             }
             progress += display;
@@ -72,14 +96,14 @@ public class Game {
      * @return number of try user has
      */
     public int getRemainTries() {
-        return mMaxMisses - mHit.length();
+        return mMaxMisses - mMiss.length();
     }
 
 
     //TODO check game is solve?!
-    public boolean isSolved(){
+    public boolean isSolved() {
 
-        return true;
+        return getCurrentPorgress().indexOf('-')== -1 ;
     }
 
 }

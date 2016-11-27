@@ -11,7 +11,8 @@ public class Hangman {
 
 
         Game game = new Game("AmirKabir", 7);
-
+        Prompter prompter = new Prompter(game);
+        prompter.playGame();
 
     }
 }
