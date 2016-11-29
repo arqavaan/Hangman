@@ -21,3 +21,9 @@ we shoud warn to user
 
 
 6- be OOP : <b>it's important you think as object oriented programming!</b>
+
+
+Note : there is a sample from prject you can run and test under Sample folder Hangman.jar file
+
+you can run jar file with this command :
+<p> java -jar <jar-file-name>.jar </p>
